@@ -1,0 +1,58 @@
+      <!-- Clear button uses HTMX -->
+      <!-- <button
+        type="button"
+        hx-post="/clear-generated-art"
+        hx-target="#result"
+        hx-swap="innerHTML"
+        hx-indicator="#working"
+        onclick="document.getElementById('artInput').value = ''"
+      >
+        Clear
+      </button> -->
+      <!-- <button
+        type="button"
+        hx-post="/clear-generated-art"
+        hx-target="#result"
+        hx-swap="innerHTML"
+        onclick="document.getElementById('artInput').value = ''"
+        hx-on="htmx:beforeRequest: this.innerText='Busy...'; 
+                 htmx:afterRequest: this.innerText='Clear'"
+      >
+        Clear
+      </button> -->
+
+      <!-- <button
+        type="submit"
+        hx-post="/convert"
+        hx-target="#result"
+        hx-swap="innerHTML"
+        id="generateButton"
+        hx-on="htmx:beforeRequest: this.innerText='Busy...'; 
+        htmx:afterRequest: this.innerText='Generate'"
+      >
+        Generate
+      </button> -->     
+
+
+<nav>
+  <a href="/" class="<%= active === 'home' ? 'active' : '' %>">Home</a>
+  <a href="/blog" class="<%= active === 'blog' ? 'active' : '' %>">Blog</a>
+  <a href="/privacy" class="<%= active === 'privacy' ? 'active' : '' %>">Privacy Policy</a>
+  <a href="/contact" class="<%= active === 'contact' ? 'active' : '' %>">Contact</a>
+</nav>
+
+nav a.active {
+  font-weight: bold;
+  color: #007acc;
+  text-decoration: underline;
+}
+
+app.get("/blog", (req, res) => {
+  // ... your existing code
+  res.render("blog", { posts, active: "blog" });
+});
+
+app.get("/blog/:slug", (req, res) => {
+  // ... your existing code
+  res.render("post", { title: data.title || req.params.slug, html, active: "blog" });
+});

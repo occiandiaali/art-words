@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/adjust.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtWords</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 6px;
+      }
+      #clearBtn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 8px;
+        margin: 6px;
+      }
+      #clearBtn:hover {
+        background-color: white;
+        color: red;
+        border: 1px solid red;
+        cursor: pointer;
+      }
+      label {
+        margin-left: 8px;
+      }
+      #generateButton {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 8px;
+        margin-left: 8px;
+      }
+      #generateButton:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        /* font-size: xx-large; */
+        padding: 6px;
+        margin-top: 5%;
+      }
+      nav {
+        /* background: #333; */
+        background: #5c4949;
+        padding: 6px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      nav a {
+        color: white;
+        margin-right: 10px;
+        text-decoration: none;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      #working {
+        display: none;
+      }
+      .htmx-request #working {
+        display: block; /* Show when request is active */
+      }
+      .htmx-settled #working {
+        display: none; /* Hide when request completes */
+      }
+      @media (max-width: 600px) {
+        h1 {
+          margin-top: 15%;
+        }
+      }
+    </style>
+  </head>
+  <body style="font-family: sans-serif; max-width: 1024px; margin: auto">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <!-- <h1>Words → Art</h1> -->
+    <h1>ArtWords</h1>
+    <form
+      hx-post="/convert"
+      hx-target="#result"
+      hx-swap="innerHTML"
+      hx-trigger="input delay:300ms, change delay:300ms from:form"
+    >
+      <textarea
+        name="text"
+        rows="4"
+        id="artInput"
+        style="width: 100%"
+        placeholder="Enter text or a paragraph..."
+        required
+      ></textarea>
+      <label>Red Factor</label>
+      <input type="range" name="rFactor" min="1" max="10" value="4" /><br />
+
+      <label>Green Factor</label>
+      <input type="range" name="gFactor" min="1" max="15" value="9" /><br />
+
+      <label>Blue Factor</label>
+      <input type="range" name="bFactor" min="1" max="10" value="1" /><br />
+
+      <hr />
+      <!-- <button
+        type="submit"
+        hx-indicator="#working"
+        style="margin-top: 10px"
+        id="generateButton"
+      >
+        Generate Art
+      </button> -->
+
+      <button type="button" onclick="clearArt()" id="clearBtn">Clear</button>
+
+      <div id="working" style="color: green">Working...</div>
+    </form>
+    <div id="result" style="margin-top: 20px"></div>
+
+    <!-- Example ad slot -->
+    <div
+      style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px"
+    >
+      <p>Ad space here</p>
+    </div>
+    <script>
+      function clearArt() {
+        // Clear the input field
+        document.getElementById("artInput").value = "";
+
+        // Clear the generated image and buttons
+        document.getElementById("result").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/adjust.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 6px;
+      }
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        /* font-size: xx-large; */
+        padding: 6px;
+        margin-top: 5%;
+      }
+      nav {
+        /* background: #333; */
+        background: #5c4949;
+        padding: 6px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      nav a {
+        color: white;
+        margin-right: 10px;
+        text-decoration: none;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        h1 {
+          margin-top: 15%;
+        }
+      }
+    </style>
+  </head>
+  <body style="font-family: sans-serif; max-width: 800px; margin: auto">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <h1><%= title %></h1>
+    <div><%- html %></div>
+
+    <p style="margin-top: 20px">
+      <a href="/blog">← Back to Blog Posts</a>
+    </p>
+
+    <!-- Inline ad slot -->
+    <div
+      style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px"
+    >
+      <p>Ad space here</p>
+    </div>
+  </body>
+</html>
