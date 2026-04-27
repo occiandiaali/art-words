@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 6px;
+  /* color: rgb(
+    83,
+    21,
+    65
+  );  */
+  color: white;
+  background: #c4caff;
+  background: linear-gradient(0deg, #c4caff, #333335);
+  background-attachment: fixed;
+}
+#clearBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin: 6px;
+}
+#clearBtn:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  cursor: pointer;
+}
+label {
+  margin-left: 8px;
+}
+#generateButton {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin-left: 8px;
+}
+#generateButton:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-size: xx-large; */
+  padding: 6px;
+  margin-top: 5%;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: rgb(37, 39, 177);
+}
+nav {
+  /* background: #333; */
+  /* background: #5c4949; */
+  background-color: rgb(85, 84, 84);
+  opacity: 0.7;
+  padding: 8px;
+  width: 100%;
+  height: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+nav a {
+  color: white;
+  /* color: rgb(216, 55, 55); */
+  margin-right: 10px;
+  text-decoration: none;
+}
+nav a:hover {
+  color: rgb(218, 204, 14);
+}
+footer {
+  font-size: small;
+  color: blue;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+textarea {
+  background-color: #dbdada;
+}
+.contact-link {
+  font-size: smaller;
+}
+#working {
+  display: none;
+}
+.htmx-request #working {
+  display: block; /* Show when request is active */
+}
+.htmx-settled #working {
+  display: none; /* Hide when request completes */
+}
+@media (max-width: 600px) {
+  h1 {
+    margin-top: 15%;
+  }
+}

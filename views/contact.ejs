@@ -1,68 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/adjust.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        padding: 6px;
-      }
-      h1 {
-        font-family: Arial, Helvetica, sans-serif;
-        /* font-size: xx-large; */
-        padding: 6px;
-        margin-top: 5%;
-      }
-      nav {
-        /* background: #333; */
-        background: #5c4949;
-        padding: 6px;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-      }
-      nav a {
-        color: white;
-        margin-right: 10px;
-        text-decoration: none;
-      }
-      nav a:hover {
-        text-decoration: underline;
-      }
-      @media (max-width: 600px) {
-        h1 {
-          margin-top: 15%;
-        }
-      }
-    </style>
-  </head>
-  <body style="font-family: sans-serif; max-width: 800px; margin: auto">
-    <nav>
-      <a href="/">Home</a>
-      <a href="/blog">Blog</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/contact">Contact</a>
-    </nav>
+
+    <%- include('partials/head', {title: 'Contact Us'}); %>
+    <%- include('partials/header'); %>
 
     <h1>Contact Us</h1>
     <p>
-      If you have questions, feedback, or business inquiries, please reach out:
+      If you have questions, feedback, business inquiries, or just want to reach out:
     </p>
     <ul>
-      <li>
-        Email:
-        <a href="mailto:occiandiaali@gmail.com">occiandiaali@gmail.com</a>
+      <li >
+       <span class="contact-link">Email</span>:
+        <a href="mailto:occiandiaali@gmail.com" target="_blank" rel="noopener noreferrer">occiandiaali@gmail.com</a>
       </li>
-      <li>
-        Twitter/X: <a href="https://twitter.com/occiandiaali">@occiandiaali</a>
+      
+      <li >
+       <span class="contact-link">Twitter/X</span>: <a href="https://twitter.com/messages/compose?recipient_id=occiandiaali" target="_blank" rel="noopener noreferrer">@occiandiaali</a>
       </li>
-      <li>
-        FaceBook:
-        <a href="https://web.facebook.com/semreh.diaali">Occian F Diaali</a>
+      <li >
+       <span class="contact-link">FaceBook</span>:
+        <a href="https://web.facebook.com/occiandrops/" target="_blank" rel="noopener noreferrer">Occian Drops</a>
       </li>
     </ul>
 
@@ -72,5 +27,5 @@
     >
       <p>Ad space here</p>
     </div>
-  </body>
-</html>
+    <%- include('partials/footer'); %>
+
