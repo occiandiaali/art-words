@@ -76,12 +76,19 @@ nav a:hover {
 footer {
   font-size: small;
   color: blue;
+  position: fixed;
+  bottom: 0;
+  left: 30%;
 }
 nav a:hover {
   text-decoration: underline;
 }
 textarea {
   background-color: #dbdada;
+}
+.contactInfo,
+.contact-link {
+  color: wheat;
 }
 .contact-link {
   font-size: smaller;
