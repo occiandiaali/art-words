@@ -1,0 +1,105 @@
+    <%- include('partials/head', {title: 'Blog'}); %>
+    <%- include('partials/header'); %>
+
+    <div style="margin: 25% auto;">
+        <h2>Upload Image to Convert</h2>
+    <!-- <input type="file" id="upload" multiple accept="image/*">
+    <button id="makeGif">Create GIF</button>
+    <div id="result"></div> -->
+    <form id="cForm" onsubmit="return convert.read()">
+  <label>Format</label>
+  <select id="cFormat">
+    <option value="webp">WEBP</option>
+    <option value="jpeg">JPG</option>
+    <option value="png">PNG</option>
+    <option value="gif">GIF</option>
+  </select>
+  <hr/>
+  <!-- <label>CHOOSE FILE</label> -->
+  <input type="file" id="cFile" accept="image/*" style="margin: 8px;" required>
+ 
+  <input type="submit" value="Convert" id="makeGif">
+</form>
+
+    </div>
+
+  <%- include('partials/footer'); %>
+
+  <script>
+    var convert = {
+  // (A) PROPERTIES
+  reader : null, // file reader
+  img : null, // selected image
+ 
+  // (B) READ SELECTED IMAGE
+  read : () => {
+    convert.reader = new FileReader();
+    convert.reader.onload = convert.obj;
+    convert.reader.readAsDataURL(
+      document.getElementById("cFile").files[0]
+    );
+    return false;
+  },
+ 
+  // (C) SELECTED IMAGE TO OBJECT
+  obj : () => {
+   convert.img = new Image();
+    convert.img.onload = convert.go;
+    convert.img.src = convert.reader.result;
+  },
+ 
+  // (D) CONVERT & DOWNLOAD
+  go : () => {
+    // (D1) CREATE EMPTY CANVAS
+    let canvas = document.createElement("canvas"),
+        ctx = canvas.getContext("2d");
+ 
+    // (D2) DRAW IMAGE ONTO CANVAS
+    canvas.width = convert.img.width;
+    canvas.height = convert.img.height;
+    ctx.drawImage(convert.img, 0, 0);
+ 
+    // (D3) GET SELECTED IMAGE FORMAT
+    let format = document.getElementById("cFormat").value,
+        ext = format=="jpeg" ? "jpg" : format ;
+ 
+    // (D4) CONVERT & "FORCE DOWNLOAD"
+    let a = document.createElement("a");
+    a.href = canvas.toDataURL(`image/${format}`);
+    a.download = `converted.${ext}`;
+    a.click();
+    a.remove();
+  }
+};
+    // document.getElementById('makeGif').onclick = async () => {
+    //   const files = document.getElementById('upload').files;
+    //   if (!files.length) {
+    //     alert("Please select at least one image.");
+    //     return;
+    //   }
+
+    //   const gif = new GIF({
+    //     workers: 2,
+    //     quality: 10,
+    //     workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+    //   });
+
+    //   for (let file of files) {
+    //     const img = new Image();
+    //     img.src = URL.createObjectURL(file);
+    //     await new Promise(res => img.onload = res);
+    //     gif.addFrame(img, {delay: 500}); // 500ms per frame
+    //   }
+
+    //   gif.on('finished', blob => {
+    //     const url = URL.createObjectURL(blob);
+    //     document.getElementById('result').innerHTML =
+    //       `<p>GIF ready! 🎉</p>
+    //        <img src="${url}">
+    //        <a href="${url}" download="output.gif">Download GIF</a>`;
+    //   });
+
+    //   gif.render();
+    // };
+
+  </script>

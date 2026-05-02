@@ -1,10 +1,13 @@
     <%- include('partials/head', {title: 'Words → Art'}); %>
     <%- include('partials/header'); %>
 
-    <h1>Words → Art</h1>
-    <!-- <h1>ArtWords</h1> -->
+    <h1>
+      Words → Art
+      <img src="/inspiration.png" alt="app logo" width="32" height="32" class="appLogoPng" />
+    </h1>
+
     <form
-      hx-post="/convert"
+      hx-post="/generate-art"
       hx-target="#result"
       hx-swap="innerHTML"
       hx-trigger="input delay:300ms, change delay:300ms from:form"
@@ -17,34 +20,66 @@
         placeholder="Enter text or a paragraph..."
         required
       ></textarea>
-      <label>Red Factor</label>
-      <input type="range" name="rFactor" min="1" max="10" value="4" /><br />
+      <label>Preset</label>
+<select name="preset" id="preset">
+  <option value="">Custom</option>
+  <option value="A4">A4 (Print)</option>
+  <option value="1080p">1080p (HD)</option>
+  <option value="4K">4K (Ultra HD)</option>
+  <option value="Square">Square</option>
+</select>
+      <div>
+        <label>Width</label>
+        <input type="number" name="artWidth" id="artWidth" placeholder="300" min="50" max="4000" />
+        <span>x</span>
+        <label>Height</label>
+        <input type="number" name="artHeight" id="artHeight" placeholder="300" min="50" max="4000" />
+      </div>
 
-      <label>Green Factor</label>
-      <input type="range" name="gFactor" min="1" max="15" value="9" /><br />
+      <label style="display:flex;align-items:center;gap:6px;">
+        <input type="checkbox" id="lockAspect" />
+        Lock Aspect Ratio
+        <span 
+          style="cursor:help;color:#d3d0d0;font-size:13px;" 
+          title="Keeps proportions fixed when you change width or height.">
+          ⓘ
+        </span>
+      </label>
+      <hr/>
 
-      <label>Blue Factor</label>
-      <input type="range" name="bFactor" min="1" max="10" value="1" /><br />
+
+      <label>Red</label>
+      <input type="range" name="rFactor" id="rFactor" min="1" max="10" value="4" /><br />
+
+      <label>Green</label>
+      <input type="range" name="gFactor" id="gFactor" min="1" max="15" value="9" /><br />
+
+      <label>Blue</label>
+      <input type="range" name="bFactor" id="bFactor" min="1" max="10" value="1" /><br />
 
       <hr />
-      <!-- <button
-        type="submit"
-        hx-indicator="#working"
-        style="margin-top: 10px"
-        id="generateButton"
-      >
-        Generate Art
-      </button> -->
-
+      <span style="color: rgb(53, 50, 50);font-size: x-small;">Toggle any of the RGB sliders if you don't immediately see an image</span><br/>
+      
       <button type="button" onclick="clearArt()" id="clearBtn">Clear</button>
-
+      
       <div id="working" style="color: rgb(255, 255, 255)">Working...</div>
     </form>
     <div id="result" style="margin-top: 20px"></div>
+    
+    <!-- <button
+      type="submit"
+      hx-indicator="#working"
+      style="margin-top: 10px"
+      id="generateButton"
+    >
+      Generate Art
+    </button> -->
+  <!--FAQs-->
+  <%- include('partials/faqs'); %>
 
     <!-- Example ad slot -->
     <div
-      style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px"
+      style="margin-top: 30px;margin-bottom: 60px; border-top: 1px solid #ccc; padding-top: 20px"
     >
       <p>Ad space here</p>
     </div>
@@ -52,6 +87,59 @@
     <%- include('partials/footer'); %>
 
     <script>
+        const presetSelect = document.getElementById("preset");
+  const widthInput = document.getElementById("artWidth");
+  const heightInput = document.getElementById("artHeight");
+  const lockAspect = document.getElementById("lockAspect");
+
+    // Store the current ratio
+  let aspectRatio = widthInput.value && heightInput.value 
+    ? widthInput.value / heightInput.value 
+    : 1;
+
+  // Update ratio whenever both inputs change
+  function updateRatio() {
+    if (widthInput.value && heightInput.value) {
+      aspectRatio = widthInput.value / heightInput.value;
+    }
+  }
+
+  widthInput.addEventListener("input", () => {
+    if (lockAspect.checked && aspectRatio) {
+      heightInput.value = Math.round(widthInput.value / aspectRatio);
+    }
+    updateRatio();
+  });
+
+  heightInput.addEventListener("input", () => {
+    if (lockAspect.checked && aspectRatio) {
+      widthInput.value = Math.round(heightInput.value * aspectRatio);
+    }
+    updateRatio();
+  });
+
+  // Handle preset selection
+  presetSelect.addEventListener("change", () => {
+    if (presetSelect.value) {
+      // Preset chosen → disable manual inputs
+      widthInput.disabled = true;
+      heightInput.disabled = true;
+
+      // Set aspect ratio based on preset
+      const presetRatios = {
+        "A4": 2480 / 3508,
+        "1080p": 1920 / 1080,
+        "4K": 3840 / 2160,
+        "Square": 1
+      };
+      aspectRatio = presetRatios[presetSelect.value];
+    } else {
+      // Custom → allow manual entry
+      widthInput.disabled = false;
+      heightInput.disabled = false;
+      updateRatio();
+    }
+  });
       function clearArt() {
         // Clear the input field
         document.getElementById("artInput").value = "";

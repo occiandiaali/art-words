@@ -1,0 +1,19 @@
+    <h1 style="font-size: medium;color: rgb(124, 14, 128);">FAQs</h1>
+    <select style="padding: 4px;" id="faq-dropdown" hx-target="#faq-answer" hx-trigger="change">
+        <option value="">See some faqs</option>
+        <% faqs.forEach(faq => { %>
+            <option value="<%= faq.question %>"><%= faq.question %></option>
+        <% }) %>
+    </select>
+
+    <div id="faq-answer" style="margin: 8px;color: rgb(124, 14, 128);">
+        <p>The FAQs answers appear here.</p>
+    </div>
+
+        <script>
+        document.getElementById('faq-dropdown').addEventListener('change', function() {
+            const selectedQuestion = this.value;
+            const answer = <%- JSON.stringify(faqs.reduce((acc, faq) => { acc[faq.question] = faq.answer; return acc; }, {})) %>;
+            document.getElementById('faq-answer').innerHTML = answer[selectedQuestion] || '<p>Select a question to see the answer.</p>';
+        });
+    </script>

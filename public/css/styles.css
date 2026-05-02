@@ -83,8 +83,20 @@ footer {
 nav a:hover {
   text-decoration: underline;
 }
-textarea {
+/* textarea {
   background-color: #dbdada;
+} */
+#artInput {
+  background-color: #dbdada;
+  margin-bottom: 6px;
+}
+#artWidth {
+  width: 40px;
+  margin: 4px;
+}
+#artHeight {
+  width: 40px;
+  margin: 4px;
 }
 .contactInfo,
 .contact-link {
@@ -102,7 +114,33 @@ textarea {
 .htmx-settled #working {
   display: none; /* Hide when request completes */
 }
+#makeGif {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px;
+  margin: 6px;
+}
+#makeGif:hover {
+  background-color: #333335;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+#rFactor {
+  accent-color: red; /* Thumb color */
+}
+#gFactor {
+  accent-color: green; /* Thumb color */
+}
+#bFactor {
+  accent-color: blue; /* Thumb color */
+}
+
 @media (max-width: 600px) {
+  footer {
+    left: 0;
+  }
   h1 {
     margin-top: 15%;
   }
