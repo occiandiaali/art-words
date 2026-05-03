@@ -160,6 +160,11 @@ app.post("/clear-generated-art", (req, res) => {
   res.send("");
 });
 
+/* --- CONVERSION PAGE --- */
+app.get("/convert", (req, res) => {
+  res.render("convert");
+});
+
 /* --- BLOG ROUTES --- */
 app.get("/blog", (req, res) => {
   const files = fs.readdirSync(path.join(__dirname, "posts"));
@@ -190,13 +195,8 @@ app.get("/privacy", (req, res) => {
 });
 
 /* --- CONTACT PAGE --- */
-app.get("/contact", (req, res) => {
-  res.render("contact");
-});
-
-/* --- GIF PAGE --- */
-app.get("/convert", (req, res) => {
-  res.render("convert");
-});
+// app.get("/contact", (req, res) => {
+//   res.render("contact");
+// });
 
 app.listen(3000, () => console.log("Server running on http://localhost:3000"));

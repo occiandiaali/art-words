@@ -1,10 +1,14 @@
-    <%- include('partials/head', {title: 'Words → Art'}); %>
+    <%- include('partials/head', {title: 'Artext'}); %>
     <%- include('partials/header'); %>
 
-    <h1>
+    <!-- <h1>
       Words → Art
       <img src="/inspiration.png" alt="app logo" width="32" height="32" class="appLogoPng" />
-    </h1>
+    </h1> -->
+    <div class="appLogoDiv">
+      <img src="/artext-logo.png" alt="app logo" width="174" height="148" class="appLogoPng" />
+
+    </div>
 
     <form
       hx-post="/generate-art"

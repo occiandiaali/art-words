@@ -11,6 +11,13 @@ body {
   background: linear-gradient(0deg, #c4caff, #333335);
   background-attachment: fixed;
 }
+.appLogoDiv {
+  padding-top: 2%;
+}
+.appLogoPng {
+  transform: rotate(-35deg);
+}
+
 #clearBtn {
   background-color: red;
   color: white;
@@ -63,6 +70,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 200;
 }
 nav a {
   color: white;
@@ -136,8 +144,22 @@ nav a:hover {
 #bFactor {
   accent-color: blue; /* Thumb color */
 }
+.convertDiv {
+  margin: 5% auto;
+}
 
 @media (max-width: 600px) {
+  .appLogoDiv {
+    padding-top: 10%;
+    margin: 0 15%;
+  }
+  .appLogoPng {
+    width: 138px;
+    height: 118px;
+  }
+  .convertDiv {
+    margin: 25% auto;
+  }
   footer {
     left: 0;
   }
